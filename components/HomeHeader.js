@@ -5,7 +5,7 @@ export default function header() {
   const [activeTab, setActiveTab] = useState('delivery')
 
   return (
-    <View style={{ flexDirection: 'row',  alignSelf: 'center'}}>
+    <View className="flex-row self-center">
       <HeaderButton 
         text="delivery" 
         activeTab={activeTab}
@@ -22,20 +22,12 @@ export default function header() {
 
 const HeaderButton = (props) => (
     <TouchableOpacity 
-      style={{ 
-        backgroundColor: props.activeTab === props.text? 'black' : 'white',
-        paddingVertical: 6,
-        paddingHorizontal: 16,
-        borderRadius: 30
-      }}
+      className={`bg-${props.activeTab === props.text ? 'black' : 'white'} mx-1 py-2 px-5 rounded-full`}
       onPress={() => props.setActiveTab(props.text)}
     >
       <Text 
-        style={{ 
-          color: props.activeTab === props.text? 'white' : 'black', 
-          fontSize: 15, 
-          fontWeight: '900' 
-      }}>
+        className={`text-${props.activeTab === props.text ? 'white' : 'black'} font-semibold text-15`}
+      >
         {props.text}
       </Text>
     </TouchableOpacity>

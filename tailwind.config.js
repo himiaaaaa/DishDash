@@ -2,9 +2,11 @@
 module.exports = {
   content: ["./App.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}",  "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    textColor: {
+    colors: {
       white: "#FFF",
       black: "#000",
+      gray: '#eee',
+      primary: "#fb923c", 
     },
     extend: {},
   },

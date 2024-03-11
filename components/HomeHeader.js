@@ -22,7 +22,7 @@ export default function header() {
 
 const HeaderButton = (props) => (
     <TouchableOpacity 
-      className={`bg-${props.activeTab === props.text ? 'black' : 'white'} mx-1 py-2 px-5 rounded-full`}
+      className={`bg-${props.activeTab === props.text ? 'primary' : 'white'} mx-1 py-2 px-5 rounded-full`}
       onPress={() => props.setActiveTab(props.text)}
     >
       <Text 

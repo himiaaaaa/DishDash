@@ -1,10 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './pages/Home';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomTabs from './components/BottomTabs';
 
+const Stack = createStackNavigator();
 export default function App() {
   return (
-    <Home />
+    <NavigationContainer>
+      <Stack.Navigator
+          initialRouteName='Home'
+          screenOptions={{
+            headerShown: false,
+          }}
+      >
+        <Stack.Screen name='Home' component={BottomTabs} />
+      </Stack.Navigator>
+  </NavigationContainer>
   );
 }
 

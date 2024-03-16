@@ -7,10 +7,10 @@ export default function Category() {
 
     return(
         <View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-3">
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-2 px-3">
                 {items.map((item, index) => (
                     <TouchableOpacity
-                        className={`ml-2 p-3 pb-8 ${selectedCategory === item.text ? "bg-primary" : "bg-white"} rounded-full align-center justify-center shadow-md`}
+                        className={`ml-2 p-3 pb-8 ${selectedCategory === item.text ? "bg-primary" : "bg-white"} rounded-full align-center justify-center shadow-sm`}
                         onPress={()=>setSelectedCategory(item.text)}
                         key={index}
                     >

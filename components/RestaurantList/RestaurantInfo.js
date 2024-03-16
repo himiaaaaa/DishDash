@@ -7,7 +7,7 @@ export const RestaurantInfo = ({ item }) => (
             <View className='flex-row'>
                 {item?.categories?.map((category, index) => {
                     return (
-                        <Text key={index} className=' bg-primary mr-2 mt-1 p-1 text-s font-medium shadow-sm shadow-primary'>{category.title}{" "}</Text>  
+                        <Text key={index} className=' bg-primary mr-2 mt-1 p-1 text-s text-white font-medium shadow-sm shadow-primary'>{category.title}{" "}</Text>  
                     )
                 })}
             </View>

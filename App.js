@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomTabs from './components/BottomTabs';
+import BottomTabs from './components/home/BottomTabs';
 
 const Stack = createStackNavigator();
 export default function App() {

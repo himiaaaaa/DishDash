@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Home from '../pages/Home';
+import Home from '../../pages/Home';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabs() {

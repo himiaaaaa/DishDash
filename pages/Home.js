@@ -7,7 +7,7 @@ import RestaurantList from '../components/home/RestaurantList/RestaurantList.js'
 import { localRestaurants } from '../constants/localRestaurants.js'
 
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
   const [city, setCity] = useState('helsinki');
   const YELP_API_KEY = process.env.YELP_API_KEY
@@ -38,7 +38,7 @@ export default function Home() {
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Category />
-          <RestaurantList restaurantData={restaurantData} />
+          <RestaurantList restaurantData={restaurantData} navigation={navigation}/>
         </ScrollView>
     </SafeAreaView>
   )

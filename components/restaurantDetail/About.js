@@ -2,11 +2,9 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 
 export default function About({ route }) {
-  const { name, image_url, price, rating, categories } = route.params.restaurant;
+  const { name, image_url, rating, categories } = route.params.restaurant;
 
-  const dotCategories = categories.map((c) => c.title).join(" • ");
-
-  const pricePlusRating = `${rating} ⭐ • ${ price ?? ""}` ;
+  const ratingStar = `• ${rating} ⭐` ;
 
   return (
     <View>
@@ -16,16 +14,24 @@ export default function About({ route }) {
         className="w-full h-48"
       />
 
-      
-      <Text className="uppercase first-letter:text-3xl -mt-8 px-4 text-white border-primary font-extrabold">
+    <View className='flex-row space-x-3 -mt-7 bg-white rounded-tr-full w-1/2 justify-center'>
+      <Text className="uppercase text-xl font-medium">
         {name}
       </Text> 
-
-      <Text className="mt-2 mx-4 text-base font-normal">
-        {dotCategories}
-        {"\n"}
-        {pricePlusRating}
+      <Text className="text-xl font-medium">
+       {ratingStar}
       </Text>
+    </View>
+  
+    <View className='flex-row'>
+      {categories?.map((category, index) => {
+          return (
+              <Text key={index} className='bg-primary mr-2 mt-3 p-1 text-s text-white font-medium shadow-sm shadow-primary'>{category.title}{" "}</Text>  
+          )
+      })}
+    </View>
+      
+     
 
     </View>
   );

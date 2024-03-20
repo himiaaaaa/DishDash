@@ -12,7 +12,7 @@ export default function MenuItem() {
     const currentItems = foodsMenu.slice(firstItemIndex, lastItemIndex)
     
       return (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
           {currentItems.map((food, index) => (
             <View className='bg-white m-3 rounded-lg shadow-sm'>
               <View className='flex-row justify-between m-4' key={index}>
@@ -38,7 +38,7 @@ export default function MenuItem() {
             <Button title="Previous" onPress={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 0} color="#fb923c" />
             <Button title="Next" onPress={() => setCurrentPage(currentPage + 1)} disabled={lastItemIndex >= foodsMenu.length} color="#fb923c" />
           </View>
-        </ScrollView>
+        </View>
       );
     }
     

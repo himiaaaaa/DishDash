@@ -18,7 +18,7 @@ export default function MenuItem() {
               <View className='flex-row justify-between m-4' key={index}>
 
                 {/* menu info */}
-                <View style={{ width: 240, justifyContent: "space-evenly" }}>
+                <View className='flex w-3/5 justify-evenly'>
                   <Text className='text-lg font-bold'>{food.title}</Text>
                   <Text>{food.description}</Text>
                   <Text>{food.price}</Text>

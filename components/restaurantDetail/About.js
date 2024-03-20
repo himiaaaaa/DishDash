@@ -14,7 +14,7 @@ export default function About({ route }) {
         className="w-full h-48"
       />
 
-    <View className='flex-row space-x-3 -mt-7 bg-white rounded-tr-full w-1/2 justify-center'>
+    <View className='flex-row space-x-3 -mt-7 bg-white rounded-tr-full w-2/3 justify-center'>
       <Text className="uppercase text-xl font-medium">
         {name}
       </Text> 
@@ -23,10 +23,12 @@ export default function About({ route }) {
       </Text>
     </View>
   
-    <View className='flex-row'>
+    <View className='flex-row mb-5'>
       {categories?.map((category, index) => {
           return (
-              <Text key={index} className='bg-primary mr-2 mt-3 p-1 text-s text-white font-medium shadow-sm shadow-primary'>{category.title}{" "}</Text>  
+              <Text key={index} className='bg-primary ml-2 mt-3 p-1 text-s text-white font-medium shadow-sm shadow-primary'>
+                {category.title}
+              </Text>  
           )
       })}
     </View>

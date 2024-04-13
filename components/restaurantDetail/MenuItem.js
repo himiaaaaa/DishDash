@@ -1,6 +1,7 @@
 import { View, Text, Image, ScrollView, Button } from "react-native";
 import React, { useState } from 'react'
 import { foodsMenu } from "../../constants/foodsMenu";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export default function MenuItem() {
     const [currentPage, setCurrentPage] = useState(0)
@@ -16,6 +17,7 @@ export default function MenuItem() {
           {currentItems.map((food, index) => (
             <View className='bg-white m-3 rounded-lg shadow-sm' key={index}>
               <View className='flex-row justify-between m-4'>
+                <BouncyCheckbox />
 
                 {/* menu info */}
                 <View className='flex w-3/5 justify-evenly'>

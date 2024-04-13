@@ -15,7 +15,7 @@ export default function MenuItem() {
       return (
         <View>
           {currentItems.map((food, index) => (
-            <View className='bg-white m-3 rounded-lg shadow-sm' key={index}>
+            <View className='bg-white mb-3 mx-2 rounded-lg shadow-sm' key={index}>
               <View className='flex-row justify-between m-4'>
                 <BouncyCheckbox />
 
@@ -36,7 +36,7 @@ export default function MenuItem() {
           ))}
 
           {/* pagination */}
-          <View className="flex-row items-center justify-center bg-white px-4 py-3">
+          <View className="flex-row items-center justify-center mt-11">
             <Button title="Previous" onPress={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 0} color="#fb923c" />
             <Button title="Next" onPress={() => setCurrentPage(currentPage + 1)} disabled={lastItemIndex >= foodsMenu.length} color="#fb923c" />
           </View>

@@ -14,8 +14,8 @@ export default function MenuItem() {
       return (
         <View>
           {currentItems.map((food, index) => (
-            <View className='bg-white m-3 rounded-lg shadow-sm'>
-              <View className='flex-row justify-between m-4' key={index}>
+            <View className='bg-white m-3 rounded-lg shadow-sm' key={index}>
+              <View className='flex-row justify-between m-4'>
 
                 {/* menu info */}
                 <View className='flex w-3/5 justify-evenly'>

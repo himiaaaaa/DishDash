@@ -5,11 +5,14 @@ import MenuItem from '../components/restaurantDetail/MenuItem'
 import ViewCart from '../components/restaurantDetail/ViewCart'
 
 export default function RestaurantDetail({ route, navigation }) {
+  console.log('route params', route.params)
+  
+  const { name } = route.params.restaurant;
   return (
     <View>
       <About route={route} />
-      <MenuItem />
-      <ViewCart navigation={navigation} RestaurantName={route.params.name}/>
+      <MenuItem restaurantName={name}/>
+      <ViewCart navigation={navigation} restaurantName={name}/>
     </View>
   )
 }

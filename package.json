@@ -22,7 +22,9 @@
     "react-native-bouncy-checkbox": "^4.0.0",
     "react-native-google-places": "^3.1.2",
     "react-native-google-places-autocomplete": "^2.5.6",
+    "react-native-reanimated": "^2.2.2",
     "react-redux": "^9.1.0",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "tslib": "^2.6.2"
   },
   "devDependencies": {

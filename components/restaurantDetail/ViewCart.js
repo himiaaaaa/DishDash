@@ -40,6 +40,7 @@ export default function ViewCart({ navigation, restaurantName }) {
 
       <Modal
         animationType="slide"
+        transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >

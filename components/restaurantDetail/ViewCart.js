@@ -37,6 +37,7 @@ export default function ViewCart({ navigation, restaurantName }) {
         restaurantName: restaurantName,
         items: restaurantItems,
         totalPrice: totalPrice,
+        pricePlusDelivery: totalPrice >= 200 ? totalPrice: (Number(totalPrice) + 5).toFixed(2),
         createdAt: serverTimestamp()
       }
       await addDoc(collection(db, 'orders'), orderData);

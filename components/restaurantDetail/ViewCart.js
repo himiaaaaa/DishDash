@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity, Modal, ScrollView, Image } from 'react-na
 import { useSelector } from'react-redux'
 import CartItem from './CartItem.js'
 import left from '../../assets/icons/left.png'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase.js'
 
 export default function ViewCart({ navigation, restaurantName }) {
+
   const [totalPrice, setTotalPrice] = useState(0);
   const { items } = useSelector((state) => state.cart.selectedItems);
   const [modalVisible, setModalVisible] = useState(false); 
@@ -15,6 +18,8 @@ export default function ViewCart({ navigation, restaurantName }) {
   useEffect(() => {
     const restaurantItems = items.filter(item => item.restaurantName === restaurantName);
 
+    console.log('items filtered', restaurantItems)
+
     const getSum = (total, item) => {
       const price = parseFloat(item.price.replace('€', ''));
       return total + price;
@@ -23,6 +28,24 @@ export default function ViewCart({ navigation, restaurantName }) {
     const newTotalPrice = restaurantItems.reduce(getSum, 0).toFixed(2);
     setTotalPrice(newTotalPrice);
   }, [restaurantName, items]);
+
+  const addOrderToFirebase = async () => {
+    try {
+      const restaurantItems = await items.filter(item => item.restaurantName === restaurantName);
+      
+      const orderData = {
+        restaurantName: restaurantName,
+        items: restaurantItems,
+        totalPrice: totalPrice,
+        createdAt: serverTimestamp()
+      }
+      await addDoc(collection(db, 'orders'), orderData);
+      console.log('Order added to Firestore successfully');
+      setModalVisible(false);
+    } catch (error) {
+      console.error('Error adding order to Firestore: ', error);
+    }
+  }
   
   return (
     <View
@@ -99,11 +122,14 @@ export default function ViewCart({ navigation, restaurantName }) {
                     {/* total fee*/}
                     <View className="flex flex-row items-center justify-between pt-3 px-5 border-t border-primary">
                       <Text className="text-lg font-medium">Total Fee</Text>
-                      <Text className="text-lg font-semibold">{totalPrice ? totalPrice >= 200 ? `€${totalPrice}`: `€${totalPrice + 5}` : "€0.00"}</Text>
+                      <Text className="text-lg font-semibold">{totalPrice ? totalPrice >= 200 ? `€${totalPrice}`: `€${(Number(totalPrice) + 5).toFixed(2)}` : "€0.00"}</Text>
                     </View>
 
                     {/* checkout button */}
-                    <TouchableOpacity className='bg-primary rounded-full w-1/2 p-3 mx-auto mt-5 mb-7 flex justify-center items-center' >       
+                    <TouchableOpacity 
+                        className='bg-primary rounded-full w-1/2 p-3 mx-auto mt-5 mb-7 flex justify-center items-center' 
+                        onPress={addOrderToFirebase}
+                    >       
                         <Text className='text-lg font-bold color-white'>Checkout</Text>
                     </TouchableOpacity>
 

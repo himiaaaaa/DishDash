@@ -43,6 +43,7 @@ export default function ViewCart({ navigation, restaurantName }) {
       await addDoc(collection(db, 'orders'), orderData);
       console.log('Order added to Firestore successfully');
       setModalVisible(false);
+      await navigation.navigate('OrderCheckedOut')
     } catch (error) {
       console.error('Error adding order to Firestore: ', error);
     }

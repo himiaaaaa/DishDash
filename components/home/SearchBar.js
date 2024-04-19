@@ -10,9 +10,9 @@ export default function SearchBar({ setCity }) {
       <GooglePlacesAutocomplete
         query={{ key: process.env.API_KEY }}
         onPress={(data) => {
-            console.log('data', data)
+            //console.log('data', data)
             const city = data.description.split(",")[0]
-            console.log('city',city)
+            //console.log('city',city)
             setCity(city)
         }}
         placeholder="Search location"

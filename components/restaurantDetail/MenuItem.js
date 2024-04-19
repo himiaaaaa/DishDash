@@ -1,16 +1,15 @@
 import { View, Text, Image, ScrollView, Button, TouchableOpacity } from "react-native";
 import React, { useState } from 'react'
-import { foodsMenu } from "../../constants/foodsMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { AddToCart, RemoveFromCart } from "../../redux/reducers/cartSlice";
 
-export default function MenuItem({ restaurantName }) {
+export default function MenuItem({ restaurantName, foodsMenu }) {
     const [currentPage, setCurrentPage] = useState(0)
     const itemsPerPage = 4
 
     const dispatch = useDispatch()
 
-    console.log('resname in menuitem', restaurantName)
+    //console.log('resname in menuitem', restaurantName)
 
     const firstItemIndex = currentPage * itemsPerPage
     const lastItemIndex = firstItemIndex + itemsPerPage

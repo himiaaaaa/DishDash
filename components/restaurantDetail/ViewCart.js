@@ -12,13 +12,13 @@ export default function ViewCart({ navigation, restaurantName }) {
   const { items } = useSelector((state) => state.cart.selectedItems);
   const [modalVisible, setModalVisible] = useState(false); 
 
-  console.log('resname in viewcart', restaurantName)
-  console.log('items in viewcart', items)
+  //console.log('resname in viewcart', restaurantName)
+  //console.log('items in viewcart', items)
 
   useEffect(() => {
     const restaurantItems = items.filter(item => item.restaurantName === restaurantName);
 
-    console.log('items filtered', restaurantItems)
+    //console.log('items filtered', restaurantItems)
 
     const getSum = (total, item) => {
       const price = parseFloat(item.price.replace('€', ''));
@@ -43,7 +43,7 @@ export default function ViewCart({ navigation, restaurantName }) {
       await addDoc(collection(db, 'orders'), orderData);
       console.log('Order added to Firestore successfully');
       setModalVisible(false);
-      await navigation.navigate('OrderCheckedOut')
+      await navigation.navigate('OrderCheckedOut', { restaurantName: restaurantName })
     } catch (error) {
       console.error('Error adding order to Firestore: ', error);
     }

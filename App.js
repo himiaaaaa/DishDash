@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import OrderCheckedOut from './pages/OrderCheckedOut';
 import ProfilePage from './pages/ProfilePage';
+import Orders from './pages/Orders';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Stack.Screen name='Home' component={BottomTabs} />
           <Stack.Screen name='RestaurantDetail' component={RestaurantDetail} />
           <Stack.Screen name='ProfilePage' component={ProfilePage} />
+          <Stack.Screen name='Orders' component={Orders} />
           <Stack.Screen name='OrderCheckedOut' component={OrderCheckedOut} />
         </Stack.Navigator>
       </NavigationContainer>

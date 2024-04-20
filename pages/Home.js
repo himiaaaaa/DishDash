@@ -33,7 +33,7 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView className="bg-gray-100 flex-1">
         <View className="bg-white p-4">
-           <HomeHeader city={city} />
+           <HomeHeader city={city}  navigation={navigation}/>
            <SearchBar setCity={setCity}/>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>

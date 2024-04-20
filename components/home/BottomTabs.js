@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../../pages/Home';
 import ProfilePage from '../../pages/ProfilePage';
+import Orders from '../../pages/Orders';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabs() {
@@ -36,7 +37,7 @@ export default function BottomTabs() {
       />
       <Tab.Screen
         name="Orders"
-        component={Home}
+        component={Orders}
         options={{
           tabBarLabel: 'Orders',
           tabBarIcon: ({ color, size }) => (

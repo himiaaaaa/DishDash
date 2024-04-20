@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-export default function header({city}) {
+export default function header({city, navigation}) {
 
   return (
     <View className="flex-row justify-between">
@@ -15,8 +15,14 @@ export default function header({city}) {
       </View>
 
       {/* shpping basket */}
-      <TouchableOpacity className='mr-3'>
-        <Image source={require('../../assets/images/shopping-basket.png')} className='tintColor-primary h-6 w-6 mt-1'/>
+      <TouchableOpacity 
+        className='mr-3'
+        onPress={() => navigation.navigate('Orders')}
+      >
+        <Image 
+          source={require('../../assets/images/shopping-basket.png')} 
+          className='tintColor-primary h-6 w-6 mt-1' 
+        />
       </TouchableOpacity>
     </View>
   )

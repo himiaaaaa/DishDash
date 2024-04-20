@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../firebase.js';
 import { setUser, clearUser, setError, clearError } from '../redux/reducers/profileSlice.js';
 import welcome from '../assets/icons/welcome.png';
 
-const ProfilePage = () => {
+export default function ProfilePage ({ navigation }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.profile.user);
     const errorMessage = useSelector(state => state.profile.errorMessage);
@@ -18,6 +18,18 @@ const ProfilePage = () => {
 
     console.log('user', user)
     console.log('errorMessage', errorMessage)
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
+          if (userAuth) {
+            dispatch(setUser(userAuth));
+          } else {
+            dispatch(clearUser());
+          }
+        });
+    
+        return unsubscribe;
+    }, [dispatch]); //to keep user logged in even after reloading app 
   
     const handleSignIn = async () => {
       try {
@@ -72,6 +84,13 @@ const ProfilePage = () => {
             <View className='flex items-center w-3/4 px-5 py-4 mr-2 bg-secondary rounded-2xl'>
                 <Text className='text-sm font-medium '>{user.email}</Text>
             </View>
+
+            <TouchableOpacity 
+                onPress={() => navigation.navigate('Home')}
+                className='w-3/4 px-6 py-3 mt-6 transition duration-300 bg-primary rounded-full'
+            >
+                <Text className='text-white text-center font-bold text-lg'>Back To Homepage</Text>
+            </TouchableOpacity>
 
             <TouchableOpacity 
                 onPress={handleSignOut}
@@ -174,4 +193,3 @@ const ProfilePage = () => {
     );
   };
   
-  export default ProfilePage;

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  selectedItems: { items: [], restaurantName: '' },
+  selectedItems: { items: [], restaurantName: '', userEmail: '' },
 };
 
 export const cartSlice = createSlice({
@@ -13,8 +13,9 @@ export const cartSlice = createSlice({
       state.selectedItems = {
          items: [...state.selectedItems.items, action.payload],
          restaurantName: action.payload.restaurantName,
+         userEmail: action.payload.userEmail,
       };
-      
+
     },
     removeFromCart: (state, action) => {
 

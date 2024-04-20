@@ -6,14 +6,16 @@ import left from '../../assets/icons/left.png'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.js'
 
-export default function ViewCart({ navigation, restaurantName }) {
+export default function ViewCart({ navigation, restaurantName, user }) {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const { items } = useSelector((state) => state.cart.selectedItems);
   const [modalVisible, setModalVisible] = useState(false); 
+  const email  = user.user.email
 
   //console.log('resname in viewcart', restaurantName)
   //console.log('items in viewcart', items)
+  //console.log('userEmail', email)
 
   useEffect(() => {
     const restaurantItems = items.filter(item => item.restaurantName === restaurantName);
@@ -35,6 +37,7 @@ export default function ViewCart({ navigation, restaurantName }) {
       
       const orderData = {
         restaurantName: restaurantName,
+        userEmail: email,
         items: restaurantItems,
         totalPrice: totalPrice,
         pricePlusDelivery: totalPrice >= 200 ? totalPrice: (Number(totalPrice) + 5).toFixed(2),
@@ -91,7 +94,9 @@ export default function ViewCart({ navigation, restaurantName }) {
 
                 {/* cart items  */}
                 <ScrollView className='flex flex-col'>
-                {items.map((item, index) => (
+                {items
+                  .filter((item) => item.restaurantName === restaurantName)
+                  .map((item, index) => (
                      <CartItem key={index} item={item} />
                  ))}
                 </ScrollView>

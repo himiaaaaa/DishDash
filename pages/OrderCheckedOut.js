@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity  } from "react-native";
 import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore';
-import { useNavigation } from '@react-navigation/native'; 
 import { db } from "../firebase";
 import LottieView from "lottie-react-native";
 import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedItem";
@@ -21,10 +20,6 @@ export default function OrderCheckedOut({ route, navigation }) {
       });
     const { restaurantName } = route.params;
     //console.log('OrderCheckedOut route', route.params.restaurantName)
-
-    const handleBackToHomepage = () => {
-        navigation.navigate('Home');
-    }
 
     useEffect(() => {
         const fetchLastOrder = async () => {
@@ -76,7 +71,7 @@ export default function OrderCheckedOut({ route, navigation }) {
           />
           <TouchableOpacity 
               className='bg-primary rounded-full w-1/2 p-3 mx-auto mt-5 mb-7 flex justify-center items-center' 
-              onPress={handleBackToHomepage}
+              onPress={() => navigation.navigate('Home')}
           >       
               <Text className='text-md font-bold color-white'>Back to Homepage</Text>
           </TouchableOpacity>

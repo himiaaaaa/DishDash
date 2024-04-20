@@ -4,16 +4,18 @@ import About from '../components/restaurantDetail/About'
 import MenuItem from '../components/restaurantDetail/MenuItem'
 import ViewCart from '../components/restaurantDetail/ViewCart'
 import { foodsMenu } from '../constants/foodsMenu'
+import { useSelector } from 'react-redux'
 
 export default function RestaurantDetail({ route, navigation }) {
   //console.log('route params', route.params)
-  
+  const user = useSelector(state => state.profile)
   const { name } = route.params.restaurant;
+
   return (
     <View>
       <About route={route} />
-      <MenuItem restaurantName={name} foodsMenu={foodsMenu}/>
-      <ViewCart navigation={navigation} restaurantName={name}/>
+      <MenuItem restaurantName={name} foodsMenu={foodsMenu} navigation={navigation} user={user} />
+      <ViewCart navigation={navigation} restaurantName={name} user={user} />
     </View>
   )
 }

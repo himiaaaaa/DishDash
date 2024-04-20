@@ -1,12 +1,39 @@
-import react, { useState } from 'react'
+import react, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useDispatch } from 'react-redux';
+import { AddToFavorites, RemoveFromFavorites, FetchFavorites  } from '../../../redux/reducers/favouriteSlice';
+import { useSelector } from 'react-redux';
 
-export const RestaurantImage = ({ item }) => {
+export const RestaurantImage = ({ item, navigation }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const { uid } = useSelector(state => state.profile.user);
+  const { items } = useSelector(state => state.favorites.favorites);
+
+  useEffect(() => {
+    dispatch(FetchFavorites(uid));
+  }, [dispatch, uid]);
+
+  //console.log('itemmm', item)
+  //console.log('itemss', items)
+
+  useEffect(() => {
+    setIsFavorite(items.some(favorite => favorite.favorite.name === item.name));
+  }, [items, item.id]);
 
   const toggleFavorite = () => {
+    if (!uid) {
+      navigation.navigate('ProfilePage')
+      return;
+    }
+  
     setIsFavorite(!isFavorite);
+    if (isFavorite) {
+      dispatch(RemoveFromFavorites({ uid, favorite: item }));
+    } else {
+      dispatch(AddToFavorites({ uid, favorite: item }));
+    }
   };
 
   return (

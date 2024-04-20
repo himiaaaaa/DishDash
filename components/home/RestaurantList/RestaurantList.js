@@ -16,7 +16,7 @@ export default function RestaurantList({restaurantData, navigation}) {
             restaurant: restaurant
         })}
         >
-            <RestaurantImage item={restaurant}/>
+            <RestaurantImage item={restaurant} navigation={navigation}/>
             <RestaurantInfo item={restaurant}/>
         </TouchableOpacity>
       ))}

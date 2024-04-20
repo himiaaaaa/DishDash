@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, up
 import { auth, db } from '../firebase.js';
 import { setUser, clearUser, setError, clearError } from '../redux/reducers/profileSlice.js';
 import welcome from '../assets/icons/welcome.png';
+import { getUserData, setUserData } from '../redux/reducers/profileSlice.js';
 
 export default function ProfilePage ({ navigation }) {
     const dispatch = useDispatch();
@@ -23,8 +24,13 @@ export default function ProfilePage ({ navigation }) {
         const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
           if (userAuth) {
             dispatch(setUser(userAuth));
+            const userData = await getUserData(userAuth.uid);
+            if (userData) {
+              setDisplayName(userData.displayName);
+            }
           } else {
             dispatch(clearUser());
+            setDisplayName('');
           }
         });
     
@@ -53,6 +59,7 @@ export default function ProfilePage ({ navigation }) {
           });
 
         dispatch(setUser(userCredential.user));
+        await setUserData(userCredential.user.uid, { displayName: displayName, email: email });
       } catch (error) {
         dispatch(setError(error.message));
       }

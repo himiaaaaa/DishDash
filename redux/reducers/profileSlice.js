@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { db } from '../../firebase';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const initialState = {
     user: {
@@ -43,5 +45,29 @@ export const profileSlice = createSlice({
 });
 
 export const { setUser, clearUser, setError, clearError } = profileSlice.actions;
+
+export const setUserData = async (uid, userData) => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, userData);
+  } catch (error) {
+    console.error("Error writing document: ", error);
+  }
+};
+
+export const getUserData = async (uid) => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      return userSnap.data();
+    } else {
+      console.log('No such document!');
+      return null;
+    }
+  } catch (error) {
+    console.error("Error getting document: ", error);
+  }
+};
 
 export default profileSlice.reducer;

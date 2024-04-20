@@ -3,6 +3,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../../pages/Home';
+import ProfilePage from '../../pages/ProfilePage';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabs() {
@@ -45,7 +46,7 @@ export default function BottomTabs() {
       />
       <Tab.Screen
         name="Profile"
-        component={Home}
+        component={ProfilePage}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (

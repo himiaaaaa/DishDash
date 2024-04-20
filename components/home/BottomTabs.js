@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../../pages/Home';
 import ProfilePage from '../../pages/ProfilePage';
 import Orders from '../../pages/Orders';
+import Favs from '../../pages/Favs';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabs() {
@@ -27,7 +28,7 @@ export default function BottomTabs() {
       />
       <Tab.Screen
         name="Favorites"
-        component={Home}
+        component={Favs}
         options={{
           tabBarLabel: 'Favs',
           tabBarIcon: ({ color, size }) => (
@@ -36,7 +37,7 @@ export default function BottomTabs() {
         }}
       />
       <Tab.Screen
-        name="Orders"
+        name="Orders History"
         component={Orders}
         options={{
           tabBarLabel: 'Orders',

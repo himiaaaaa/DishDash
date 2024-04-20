@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedItem";
 import { format } from 'date-fns';
 import dot from '../assets/icons/dot.png';
+import no_completed from '../assets/images/no-completed.png';
 
 export default function Orders({ navigation }) {
     const user = useSelector(state => state.profile)
@@ -96,7 +97,14 @@ export default function Orders({ navigation }) {
                 </View>
             ))
         ) : (
-            <Text>No completed orders found</Text>
+            <View className='flex items-center justify-center mt-56'>
+                <Image 
+                    source={no_completed}
+                    className='w-40 h-40'
+                />
+                <Text className='font-semibold mt-4'>No completed orders yet</Text>
+            </View>
+           
         )}
       </ScrollView>
       </View>

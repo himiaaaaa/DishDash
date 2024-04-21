@@ -10,17 +10,28 @@ import { localRestaurants } from '../constants/localRestaurants.js'
 export default function Home({ navigation }) {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
   const [city, setCity] = useState('helsinki');
+  const [category, setCategory] = useState('');
+
   const YELP_API_KEY = process.env.YELP_API_KEY
+
+  console.log('categoryyyy', category)
+
   
   const getRestaurantsFromYelp = async () => {
-    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
-  
+ 
+    let yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
+    
+    if (category) {
+      yelpUrl += `&categories=${category}`; 
+    }
+
     const requestOptions = {
         headers: {
           Authorization: `Bearer ${YELP_API_KEY}`,
         },
     };
-  
+    console.log('yelpurl', yelpUrl)
+
     return fetch(yelpUrl, requestOptions)
       .then((res) => res.json())
       .then((data) => setRestaurantData(data.businesses));
@@ -28,7 +39,10 @@ export default function Home({ navigation }) {
   
   useEffect(() => {
     getRestaurantsFromYelp();
-  }, [city]);
+  }, [city, category]);
+
+  
+  console.log('restaurantData', restaurantData)
 
   return (
     <SafeAreaView className="bg-gray-100 flex-1">
@@ -37,7 +51,7 @@ export default function Home({ navigation }) {
            <SearchBar setCity={setCity}/>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Category />
+          <Category setCategory={setCategory} />
           <RestaurantList restaurantData={restaurantData} navigation={navigation}/>
         </ScrollView>
     </SafeAreaView>

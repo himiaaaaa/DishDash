@@ -2,16 +2,21 @@ import { View, Text, Image, FlatList, TouchableOpacity, ScrollView } from 'react
 import React, { useState } from 'react'
 import { items } from '../../constants/items'
 
-export default function Category() {
+export default function Category({ setCategory }) {
     const [selectedCategory, setSelectedCategory] = useState(null)
+
+    const selectCategory = (category) => {
+        setSelectedCategory(category);
+        setCategory(category); 
+      }
 
     return(
         <View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-2 px-3">
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} className="pt-2 px-3">
                 {items.map((item, index) => (
                     <TouchableOpacity
-                        className={`ml-2 p-3 pb-8 ${selectedCategory === item.text ? "bg-primary" : "bg-white"} rounded-full align-center justify-center shadow-sm`}
-                        onPress={()=>setSelectedCategory(item.text)}
+                        className={`flex ml-2 p-3 pb-8 ${selectedCategory === item.text ? "bg-primary" : "bg-white"} rounded-full align-center justify-center items-center shadow-sm`}
+                        onPress={()=>selectCategory(item.text)}
                         key={index}
                     >
                         <View  className={`flex items-center justify-center rounded-full w-12 h-12 ${selectedCategory === item.text ? "bg-white" : "bg-gray"}`} >

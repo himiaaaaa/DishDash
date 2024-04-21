@@ -12,7 +12,7 @@ export const RestaurantInfo = ({ item }) => (
                 })}
             </View>
         </View>
-        <View className='bg-white h-10 w-10 rounded-full p-2 justify-center self-center'>
+        <View className='bg-white h-10 w-10 rounded-full p-2 flex justify-center items-center self-center'>
           <Text>{item?.rating}</Text>
         </View>
     </View>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../firebase.js';
 import { setUser, clearUser, setError, clearError } from '../redux/reducers/profileSlice.js';
-import welcome from '../assets/icons/welcome.png';
+import welcome from '../assets/images/welcome.png';
 import { getUserData, setUserData } from '../redux/reducers/profileSlice.js';
 
 export default function ProfilePage ({ navigation }) {
@@ -82,7 +82,7 @@ export default function ProfilePage ({ navigation }) {
             <Image 
                 source={welcome}
                 resizeMode="contain"
-                className="w-30 h-30"
+                className="w-36 h-36"
             />
             <Text className='mb-6 text-4xl font-extrabold color-primary text-center'>Welcome to DishDash, {user.displayName}!</Text>
             

@@ -54,6 +54,7 @@ export default function Home({ navigation }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Category setCategory={setCategory} />
           <Carousel />
+          <Text className='text-lg font-bold ml-3 pl-2'>Fastest near you</Text>
           <RestaurantList restaurantData={restaurantData} navigation={navigation}/>
         </ScrollView>
     </SafeAreaView>

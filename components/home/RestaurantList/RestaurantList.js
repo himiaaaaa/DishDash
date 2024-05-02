@@ -7,7 +7,6 @@ export default function RestaurantList({restaurantData, navigation}) {
 
   return (
     <>
-      <Text className='text-lg font-bold ml-3 pl-2'>Fastest near you</Text>
       {restaurantData.map((restaurant, index) => (
         <TouchableOpacity
           key={index}

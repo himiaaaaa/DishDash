@@ -12,6 +12,7 @@ export default function Category({ setCategory }) {
 
     return(
         <View>
+            <Text className='text-lg font-bold ml-3 pt-3 pl-2'>Categories</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} className="pt-2 px-3">
                 {items.map((item, index) => (
                     <TouchableOpacity

@@ -59,7 +59,7 @@ export default function OrderCheckedOut({ route, navigation }) {
             Your order from {restaurantName} is on its way!
         </Text>
 
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <OrderCompletedItem
             foodsMenu={orders.items}
           />

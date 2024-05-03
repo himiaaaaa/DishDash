@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image  } from "react-native";
-import { collection, getDocs, query, where, orderBy, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import { db } from "../firebase";
 import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedItem";
 import { format } from 'date-fns';
@@ -34,18 +34,6 @@ export default function Orders({ navigation }) {
             
             const ordersRef = collection(db, 'orders');
             const q = query(ordersRef, where("userEmail", "==", email), orderBy('createdAt', 'desc'));
-            
-            // const querySnapshot = await getDocs(q);
-
-            // const completedOrders = [];
-            // querySnapshot.forEach((doc) => {
-
-            //     completedOrders.push(doc.data());
-            // });
-
-            // console.log('Completed orders', completedOrders)
-
-            // setOrders(completedOrders);
 
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const completedOrders = [];
@@ -63,6 +51,32 @@ export default function Orders({ navigation }) {
         }
     };
 
+    const deleteOrder = async (userEmail, orderDate) => {
+        try {
+            console.log("User Email:", userEmail, "Order Date:", orderDate)
+            const ordersRef = collection(db, 'orders');
+            const q = query(ordersRef, where("userEmail", "==", userEmail), where("createdAt", "==", orderDate));
+            
+            const querySnapshot = await getDocs(q);
+            
+            if (querySnapshot.empty) {
+                console.log("No matching orders found.");
+                return;
+            }
+            
+            querySnapshot.forEach(async (docSnapshot) => {
+                console.log("Deleting order:", docSnapshot.id)
+                const orderRef = doc(db, 'orders', docSnapshot.id);
+                await deleteDoc(orderRef);
+            });
+            
+            console.log("Order deleted successfully");
+            
+        } catch (error) {
+            console.error("Error deleting order: ", error);
+        }
+    };
+
     useEffect(() => {
         fetchCompletedOrders();
     }, [navigation, email]);
@@ -72,9 +86,11 @@ export default function Orders({ navigation }) {
         return format(date, "Pp");
     };
 
+    console.log('orders in orders', orders[0])
+
     return (
     <SafeAreaView>
-        <ScrollView className=" bg-white " showsVerticalScrollIndicator={false}>
+        <ScrollView className=" bg-white" showsVerticalScrollIndicator={false}>
           <View className="mt-2 flex flex-col items-center justify-center mx-2">
             {orders.length > 0 ? (
                 orders.map((order, index) => (
@@ -92,14 +108,19 @@ export default function Orders({ navigation }) {
                        <OrderCompletedItem
                             foodsMenu={order.items}
                        /> 
-                       <View className='flex flex-row gap-2 pl-2'>
-                            <Text className='font-semibold color-primary'>Sum:</Text>
-                            <Text className='font-normal color-primary'>€{order.pricePlusDelivery}</Text>
+                       <View className='flex flex-row justify-between items-center'>
+                            <View className='flex flex-row gap-2 pl-2'>
+                                <Text className='font-semibold color-primary'>Sum:</Text>
+                                <Text className='font-normal color-primary'>€{order.pricePlusDelivery}</Text>
+                            </View>
+                                <TouchableOpacity className="mt-2" onPress={() => deleteOrder(order.userEmail, order.createdAt)}>
+                                    <Text className="font-bold mr-2">Delete</Text>
+                                </TouchableOpacity>
                        </View>
                     </View>
                 ))
             ) : (
-                <View className='flex items-center justify-center'>
+                <View className='flex items-center justify-center '>
                     <Image 
                         source={no_completed}
                         className='w-40 h-40'

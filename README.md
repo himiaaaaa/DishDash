@@ -1,6 +1,8 @@
 ## Introduction
 
-This project is a mobile food delivery application developed using React Native. 
+DishDash - a mobile food delivery application developed using React Native. 
+
+![preview](./assets/images/preview.png)
 
 ## Technologies
 

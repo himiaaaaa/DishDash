@@ -8,17 +8,39 @@ DishDash - a mobile food delivery application developed using React Native.
 
 - **React Native** and **Expo**
 
-- **NativeWind**: Tailwind CSS for React Native to manage and style the user interface.
-- **Google Places API**: For integrating location and place search functionality, including restaurant searches.
-- **Yelp API**: To fetch data on restaurants and integrate it into the app.
-- **Redux**: For state management across the app.
-- **Firebase Authentication**: For user authentication (sign-in, sign-up, and logout functionality).
-- **Firebase Firestore Database**: For storing order data and user information.
-- **React Navigation**: For managing navigation within the app, including bottom tabs and stack navigation.
-- **React Native Vector Icons**: To add icons to the app's UI for a better user experience.
-- **Lottie React Native**: For implementing animations.
-- **Dotenv**: For managing environment variables, such as API keys.
-- **React Native Swiper**: For implementing a food picture carousel.
+- **NativeWind**: 
+
+Tailwind CSS for React Native to manage and style the user interface.
+- **Google Places API**: 
+
+For integrating location and place search functionality, including restaurant searches.
+- **Yelp API**: 
+
+To fetch data on restaurants and integrate it into the app.
+- **Redux**: 
+
+For state management across the app.
+- **Firebase Authentication**: 
+
+For user authentication (sign-in, sign-up, and logout functionality).
+- **Firebase Firestore Database**: 
+
+For storing order data and user information.
+- **React Navigation**: 
+
+For managing navigation within the app, including bottom tabs and stack navigation.
+- **React Native Vector Icons**: 
+
+To add icons to the app's UI for a better user experience.
+- **Lottie React Native**: 
+
+For implementing animations.
+- **Dotenv**: 
+
+For managing environment variables, such as API keys.
+- **React Native Swiper**: 
+
+For implementing a food picture carousel.
 
 ## Functionalities
 

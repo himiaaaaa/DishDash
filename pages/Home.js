@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
 import React, {useEffect, useState} from 'react'
-import HomeHeader from '../components/home/HomeHeader.js'
+import HomeHeader from '../components/home/HomeHeader/HomeHeader.js'
 import SearchBar from '../components/home/SearchBar.js'
 import Category from '../components/home/Category.js'
 import RestaurantList from '../components/home/RestaurantList/RestaurantList.js'

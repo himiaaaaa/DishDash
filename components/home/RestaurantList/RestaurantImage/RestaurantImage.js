@@ -1,9 +1,10 @@
-import react, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from 'react-redux';
-import { AddToFavorites, RemoveFromFavorites, FetchFavorites } from '../../../../redux/reducers/favouriteSlice';
+import { FetchFavorites } from '../../../../redux/reducers/favouriteSlice';
 import { useSelector } from 'react-redux';
+import { toggleFavorite } from '../../../../services/FavService';
 
 export const RestaurantImage = ({ item, navigation }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -19,20 +20,6 @@ export const RestaurantImage = ({ item, navigation }) => {
     setIsFavorite(items.some(favorite => favorite.favorite.name === item.name));
   }, [items, item.id]);
 
-  const toggleFavorite = () => {
-    if (!uid) {
-      navigation.navigate('ProfilePage')
-      return;
-    }
-  
-    setIsFavorite(!isFavorite);
-    if (isFavorite) {
-      dispatch(RemoveFromFavorites({ uid, favorite: item }));
-    } else {
-      dispatch(AddToFavorites({ uid, favorite: item }));
-    }
-  };
-
   return (
     <View className="static">
       {/* image */}
@@ -47,7 +34,7 @@ export const RestaurantImage = ({ item, navigation }) => {
       <TouchableOpacity 
         testID='toggle-favorite'
         className='absolute right-5 top-5'
-        onPress={toggleFavorite}
+        onPress={() => toggleFavorite(uid, item, isFavorite, dispatch, navigation)}
       >
         <MaterialCommunityIcons 
           testID='favorite-heart'

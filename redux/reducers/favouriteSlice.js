@@ -21,7 +21,10 @@ export const favoriteSlice = createSlice({
         (item) => item.id === action.payload.id
       );
 
-      state.favorites.items.splice(itemToRemoveIndex, 1);
+      if (itemToRemoveIndex !== -1) {
+        state.favorites.items.splice(itemToRemoveIndex, 1);
+      }
+
     },
     fetchFavorites: (state, action) => {
         state.favorites = {
@@ -66,16 +69,18 @@ export function RemoveFromFavorites(favorite){
         if (docSnap.exists()) {
           let i = 0;
           while (docSnap.data()[i]) {
-            //console.log('docSnap.data()[i].favorite.name', docSnap.data()[i].favorite.name);
-            //console.log('favorite.favorite.name', favorite.favorite.name);
-            if(docSnap.data()[i].favorite.name !== favorite.favorite.name)
-            favorites.push(docSnap.data()[i])
-            i++;
+            console.log('docSnap.data()[i].favorite.id', docSnap.data()[i].favorite.id);
+            console.log('favorite.favorite.id', favorite.favorite.id);
+            if(docSnap.data()[i].favorite.id !== favorite.favorite.id)
+              favorites.push(docSnap.data()[i])
+              i++;
           }
           await setDoc(docRef, { ...favorites });
         }
         dispatch(favoriteSlice.actions.removeFromFavorites(favorite));
+        dispatch(favoriteSlice.actions.fetchFavorites(favorites));
       } catch (error) {
+        console.log('error in remove fav', error)
         return error;
       }
   }

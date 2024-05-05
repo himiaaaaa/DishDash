@@ -36,8 +36,7 @@ export default function Orders({ navigation }) {
     console.log('orders in orders', orders[0])
 
     return (
-    <SafeAreaView>
-        <ScrollView className=" bg-white" showsVerticalScrollIndicator={false}>
+        <ScrollView className='bg-white' showsVerticalScrollIndicator={false}>
           <View className="mt-2 flex flex-col items-center justify-center mx-2">
             {orders.length > 0 ? (
                 orders.map((order, index) => (
@@ -67,7 +66,7 @@ export default function Orders({ navigation }) {
                     </View>
                 ))
             ) : (
-                <View className='flex items-center justify-center '>
+                <View className='flex items-center justify-center mt-56'>
                     <Image 
                         source={no_completed}
                         className='w-40 h-40'
@@ -77,6 +76,5 @@ export default function Orders({ navigation }) {
             )}
           </View>
         </ScrollView>
-    </SafeAreaView>
     )
 }

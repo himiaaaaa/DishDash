@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image  } from "react-native";
-import { collection, getDocs, query, where, orderBy, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
-import { db } from "../firebase";
 import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedItem/OrderCompletedItem";
 import { format } from 'date-fns';
 import dot from '../assets/icons/dot.png';

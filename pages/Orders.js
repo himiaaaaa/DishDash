@@ -7,6 +7,7 @@ import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedIte
 import { format } from 'date-fns';
 import dot from '../assets/icons/dot.png';
 import no_completed from '../assets/images/no-completed.png';
+import { fetchCompletedOrders, deleteOrder } from "../services/OrdersService";
 
 export default function Orders({ navigation }) {
     const user = useSelector(state => state.profile)
@@ -25,60 +26,8 @@ export default function Orders({ navigation }) {
         ],
     });
 
-    const fetchCompletedOrders = async () => {
-        try {
-            if (!email) {
-                navigation.navigate('ProfilePage');
-                return;
-            }
-            
-            const ordersRef = collection(db, 'orders');
-            const q = query(ordersRef, where("userEmail", "==", email), orderBy('createdAt', 'desc'));
-
-            const unsubscribe = onSnapshot(q, (querySnapshot) => {
-                const completedOrders = [];
-                querySnapshot.forEach((doc) => {
-                    completedOrders.push(doc.data());
-                });
-                setOrders(completedOrders);
-                console.log('Completed orders', completedOrders)
-            });
-
-            return unsubscribe;
-
-        } catch (error) {
-            console.error('Error fetching completed orders from Firestore: ', error);
-        }
-    };
-
-    const deleteOrder = async (userEmail, orderDate) => {
-        try {
-            console.log("User Email:", userEmail, "Order Date:", orderDate)
-            const ordersRef = collection(db, 'orders');
-            const q = query(ordersRef, where("userEmail", "==", userEmail), where("createdAt", "==", orderDate));
-            
-            const querySnapshot = await getDocs(q);
-            
-            if (querySnapshot.empty) {
-                console.log("No matching orders found.");
-                return;
-            }
-            
-            querySnapshot.forEach(async (docSnapshot) => {
-                console.log("Deleting order:", docSnapshot.id)
-                const orderRef = doc(db, 'orders', docSnapshot.id);
-                await deleteDoc(orderRef);
-            });
-            
-            console.log("Order deleted successfully");
-            
-        } catch (error) {
-            console.error("Error deleting order: ", error);
-        }
-    };
-
     useEffect(() => {
-        fetchCompletedOrders();
+        fetchCompletedOrders(email, setOrders, navigation);
     }, [navigation, email]);
 
     const formatOrderDate = (timestamp) => {

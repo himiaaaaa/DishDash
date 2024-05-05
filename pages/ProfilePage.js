@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from '../firebase.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase.js';
 import { setUser, clearUser, setError, clearError } from '../redux/reducers/profileSlice.js';
 import welcome from '../assets/images/welcome.png';
-import { getUserData, setUserData } from '../redux/reducers/profileSlice.js';
+import { getUserData } from '../redux/reducers/profileSlice.js';
 import Notification from '../components/notification/Notification.js'
+import { handleSignIn, handleSignUp, handleSignOut } from '../services/authService.js';
 
 export default function ProfilePage ({ navigation }) {
     const dispatch = useDispatch();
@@ -19,7 +20,6 @@ export default function ProfilePage ({ navigation }) {
     const [displayName, setDisplayName] = useState('');
 
     console.log('user', user)
-    console.log('errorMessage', errorMessage)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
@@ -37,46 +37,7 @@ export default function ProfilePage ({ navigation }) {
     
         return unsubscribe;
     }, [dispatch]); //to keep user logged in even after reloading app 
-  
-    const handleSignIn = async () => {
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        dispatch(setUser(userCredential.user));
-      } catch (error) {
-        console.log('error', error.message)
-        dispatch(setError('Failed to sign in, please check your email or password!'));
-      }
-    };
-  
-    const handleSignUp = async () => {
-      try {
-        if (password !== confirmPassword) {
-          dispatch(setError("Passwords don't match!"));
-          return;
-        }
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-        await updateProfile(userCredential.user, {
-            displayName: displayName,
-          });
-
-        dispatch(setUser(userCredential.user));
-        await setUserData(userCredential.user.uid, { displayName: displayName, email: email });
-      } catch (error) {
-        console.log('error', error.message)
-        dispatch(setError('Failed to sign up!'));
-      }
-    };
-  
-    const handleSignOut = async () => {
-      try {
-        await signOut(auth);
-        dispatch(clearUser());
-      } catch (error) {
-        console.log('error', error.message)
-        dispatch(setError('Failed to sign out!'));
-      }
-    };
   
     return (
       <View className='flex flex-1 bg-white py-5'>
@@ -104,7 +65,7 @@ export default function ProfilePage ({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity 
-                onPress={handleSignOut}
+                onPress={() => handleSignOut(auth, dispatch)}
                 className='w-3/4 px-6 py-3 mt-6 transition duration-300 bg-primary rounded-full'
             >
                 <Text className='text-white text-center font-bold text-lg'>Sign Out</Text>
@@ -141,7 +102,7 @@ export default function ProfilePage ({ navigation }) {
                     <Notification errorMessage={errorMessage} clearError={() => dispatch(clearError())} />
 
                     <TouchableOpacity 
-                        onPress={handleSignIn}
+                        onPress={() => handleSignIn(auth, email, password, dispatch)}
                         className='w-3/4 px-6 py-3 my-8 transition duration-300 bg-primary rounded-full'
                     >
                         <Text className='text-white text-center font-bold text-lg'>Sign In</Text>
@@ -193,7 +154,7 @@ export default function ProfilePage ({ navigation }) {
                     <Notification errorMessage={errorMessage} clearError={() => dispatch(clearError())} />
 
                     <TouchableOpacity 
-                        onPress={handleSignUp}
+                        onPress={() => handleSignUp(auth, email, password, confirmPassword, displayName, dispatch)}
                         className='w-3/4 px-6 py-3 my-8 transition duration-300 bg-primary rounded-full'
                     >
                         <Text className='text-white text-center font-bold text-lg'>Sign Up</Text>

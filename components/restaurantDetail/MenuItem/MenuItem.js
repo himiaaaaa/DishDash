@@ -1,7 +1,7 @@
 import { View, Text, Image, Button, TouchableOpacity } from "react-native";
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { AddToCart, RemoveFromCart } from "../../../redux/reducers/cartSlice";
+import { handleAddToCart, handleRemoveFromCart } from "../../../services/cartService";
 
 export default function MenuItem({ restaurantName, foodsMenu, navigation, user }) {
     const [currentPage, setCurrentPage] = useState(0)
@@ -21,22 +21,6 @@ export default function MenuItem({ restaurantName, foodsMenu, navigation, user }
     const itemCount = (food) => {
       return selectedItems.filter(item => item.title === food.title && item.restaurantName === restaurantName).length;
     };
-
-    const handleAddToCart = async (food, restaurantName, email, isAuthenticated) => {
-      if (!isAuthenticated) {
-        await navigation.navigate('ProfilePage');
-      } else {
-        dispatch(AddToCart({...food, restaurantName, email}));
-      }
-    };
-  
-    const handleRemoveFromCart = async (food, restaurantName, email, isAuthenticated) => {
-      if (!isAuthenticated) {
-        await navigation.navigate('ProfilePage');
-      } else {
-        dispatch(RemoveFromCart({...food, restaurantName, email}));
-      }
-    };
   
       return (
         <View>
@@ -48,7 +32,7 @@ export default function MenuItem({ restaurantName, foodsMenu, navigation, user }
                 <View className='flex-row items-center'>
                   <TouchableOpacity
                     title="-"
-                    onPress={() => handleRemoveFromCart(food, restaurantName, email, isAuthenticated)}
+                    onPress={() => handleRemoveFromCart(dispatch, food, restaurantName, email, isAuthenticated, navigation)}
                     disabled={itemCount(food) === 0}
                     className='bg-primary w-5 h-5 flex items-center justify-center rounded-full mr-1'
                   >
@@ -57,7 +41,7 @@ export default function MenuItem({ restaurantName, foodsMenu, navigation, user }
                   <Text>{itemCount(food)}</Text>
                   <TouchableOpacity
                     title="+"
-                    onPress={() => handleAddToCart(food, restaurantName, email, isAuthenticated)}
+                    onPress={() => handleAddToCart(dispatch, food, restaurantName, email, isAuthenticated, navigation)}
                     className='bg-primary w-5 h-5 flex items-center justify-center rounded-full ml-1 mr-3'
                   >
                     <Text className='text-white'>+</Text>

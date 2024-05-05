@@ -3,8 +3,6 @@ import { View, Text, TouchableOpacity, Modal, ScrollView, Image } from 'react-na
 import { useSelector } from'react-redux'
 import CartItem from '../CartItem/CartItem.js'
 import left from '../../../assets/icons/left.png'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../../firebase.js'
 import { addOrderToFirebase } from '../../../services/OrdersService.js'
 
 export default function ViewCart({ navigation, restaurantName, user }) {

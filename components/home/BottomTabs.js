@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../../pages/Home';
 import ProfilePage from '../../pages/ProfilePage';
 import Orders from '../../pages/Orders';
-import Favs from '../../pages/Favs/Favs';
+import Favs from '../../pages/Favs';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabs() {

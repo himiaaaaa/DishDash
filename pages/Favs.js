@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { View, Text, ScrollView, Image } from "react-native";
-import RestaurantList from "../../components/home/RestaurantList/RestaurantList";
-import no_fav from '../../assets/images/no-fav.png';
+import RestaurantList from "../components/home/RestaurantList/RestaurantList";
+import no_fav from '../assets/images/no-fav.png';
 
 export default function Favs({ navigation }) {
     const { items } = useSelector(state => state.favorites.favorites);

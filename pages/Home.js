@@ -1,11 +1,11 @@
 import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import HomeHeader from '../components/home/HomeHeader/HomeHeader.js'
-import SearchBar from '../components/home/SearchBar.js'
-import Category from '../components/home/Category.js'
+import SearchBar from '../components/home/SearchBar/SearchBar.js'
+import Category from '../components/home/Category/Category.js'
 import RestaurantList from '../components/home/RestaurantList/RestaurantList.js'
 import { localRestaurants } from '../constants/localRestaurants.js'
-import Carousel from '../components/home/Carousel.js'
+import Carousel from '../components/home/Carousel/Carousel.js'
 
 
 export default function Home({ navigation }) {
@@ -15,9 +15,6 @@ export default function Home({ navigation }) {
 
   const YELP_API_KEY = process.env.YELP_API_KEY
 
-  console.log('categoryyyy', category)
-
-  
   const getRestaurantsFromYelp = async () => {
  
     let yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;

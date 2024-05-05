@@ -1,11 +1,10 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../../pages/Home';
 import ProfilePage from '../../pages/ProfilePage';
 import Orders from '../../pages/Orders';
-import Favs from '../../pages/Favs';
+import Favs from '../../pages/Favs/Favs';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabs() {

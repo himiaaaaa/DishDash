@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import About from '../components/restaurantDetail/About'
-import MenuItem from '../components/restaurantDetail/MenuItem'
-import ViewCart from '../components/restaurantDetail/ViewCart'
+import About from '../components/restaurantDetail/About/About'
+import MenuItem from '../components/restaurantDetail/MenuItem/MenuItem'
+import ViewCart from '../components/restaurantDetail/ViewCart/ViewCart'
 import { foodsMenu } from '../constants/foodsMenu'
 import { useSelector } from 'react-redux'
 

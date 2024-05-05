@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, Button, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from 'react'
 
 export default function OrderCompletedItem({ foodsMenu }) {
@@ -18,7 +18,11 @@ export default function OrderCompletedItem({ foodsMenu }) {
 
                 {/* menu image */}
                 <View>
-                  <Image source={{ uri: food.image }} className='h-24 w-24 rounded-lg'/>
+                  <Image 
+                    testID='food-image'
+                    source={{ uri: food.image }} 
+                    className='h-24 w-24 rounded-lg'
+                  />
                 </View>
 
               </View> 

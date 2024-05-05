@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, TouchableOpacity, Modal, ScrollView, Image } from 'react-native'
 import { useSelector } from'react-redux'
-import CartItem from './CartItem.js'
-import left from '../../assets/icons/left.png'
+import CartItem from '../CartItem/CartItem.js'
+import left from '../../../assets/icons/left.png'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase.js'
+import { db } from '../../../firebase.js'
 
 export default function ViewCart({ navigation, restaurantName, user }) {
 
@@ -13,14 +13,9 @@ export default function ViewCart({ navigation, restaurantName, user }) {
   const [modalVisible, setModalVisible] = useState(false); 
   const email  = user.user.email
 
-  //console.log('resname in viewcart', restaurantName)
-  //console.log('items in viewcart', items)
-  //console.log('userEmail', email)
 
   useEffect(() => {
     const restaurantItems = items.filter(item => item.restaurantName === restaurantName);
-
-    //console.log('items filtered', restaurantItems)
 
     const getSum = (total, item) => {
       const price = parseFloat(item.price.replace('€', ''));
@@ -97,7 +92,7 @@ export default function ViewCart({ navigation, restaurantName, user }) {
                 {items
                   .filter((item) => item.restaurantName === restaurantName)
                   .map((item, index) => (
-                     <CartItem key={index} item={item} />
+                     <CartItem key={index} item={item}/>
                  ))}
                 </ScrollView>
 

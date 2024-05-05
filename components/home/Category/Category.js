@@ -1,6 +1,6 @@
 import { View, Text, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import { items } from '../../constants/items'
+import { items } from '../../../constants/items'
 
 export default function Category({ setCategory }) {
     const [selectedCategory, setSelectedCategory] = useState(null)

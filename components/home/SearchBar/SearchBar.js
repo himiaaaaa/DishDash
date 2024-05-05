@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -10,9 +10,7 @@ export default function SearchBar({ setCity }) {
       <GooglePlacesAutocomplete
         query={{ key: process.env.API_KEY }}
         onPress={(data) => {
-            //console.log('data', data)
             const city = data.description.split(",")[0]
-            //console.log('city',city)
             setCity(city)
         }}
         placeholder="Search location"
@@ -30,13 +28,14 @@ export default function SearchBar({ setCity }) {
           },
         }}
         renderLeftButton={() => (
-          <View className='ml-4'>
+          <View className='ml-4' testID="location-icon">
             <Ionicons name="location-sharp" size={24} />
           </View>
         )}
         renderRightButton={() => (
           <View
             className='flex-row mr-4 bg-white p-2 rounded-2xl items-center'
+            testID="search-icon"
           >
             <AntDesign
               name="clockcircle"

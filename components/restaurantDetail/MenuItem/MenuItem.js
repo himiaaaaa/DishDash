@@ -1,7 +1,7 @@
-import { View, Text, Image, ScrollView, Button, TouchableOpacity } from "react-native";
+import { View, Text, Image, Button, TouchableOpacity } from "react-native";
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { AddToCart, RemoveFromCart } from "../../redux/reducers/cartSlice";
+import { AddToCart, RemoveFromCart } from "../../../redux/reducers/cartSlice";
 
 export default function MenuItem({ restaurantName, foodsMenu, navigation, user }) {
     const [currentPage, setCurrentPage] = useState(0)
@@ -10,8 +10,6 @@ export default function MenuItem({ restaurantName, foodsMenu, navigation, user }
     const { email } = user.user
 
     const dispatch = useDispatch()
-
-    //console.log('resname in menuitem', restaurantName)
 
     const firstItemIndex = currentPage * itemsPerPage
     const lastItemIndex = firstItemIndex + itemsPerPage

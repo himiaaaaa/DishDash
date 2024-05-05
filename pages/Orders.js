@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image  } from "react-native";
-import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedItem/OrderCompletedItem";
+import OrderCompletedItem from "../components/OrderCompletedItem/OrderCompletedItem";
 import { format } from 'date-fns';
 import dot from '../assets/icons/dot.png';
 import no_completed from '../assets/images/no-completed.png';

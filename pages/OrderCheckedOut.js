@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, ScrollView, TouchableOpacity  } from "react-n
 import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore';
 import { db } from "../firebase";
 import LottieView from "lottie-react-native";
-import OrderCompletedItem from "../components/restaurantDetail/OrderCompletedItem/OrderCompletedItem";
+import OrderCompletedItem from "../components/OrderCompletedItem/OrderCompletedItem";
 import checkMark from '../assets/animations/check-mark.json'
 import delivery from '../assets/animations/delivery.json'
 

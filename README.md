@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 DishDash - a mobile food delivery application developed using React Native. 
 
@@ -6,58 +6,59 @@ DishDash - a mobile food delivery application developed using React Native.
 
 ## Technologies
 
-- **React Native** and **Expo**
+- **React Native** & **Expo**
 
-- **NativeWind**: 
+- **NativeWind**
 
-Tailwind CSS for React Native to manage and style the user interface.
+- **Google Places API**
 
-- **Google Places API**: 
+- **React Native Google Place Autocomplete**
 
-For integrating location and place search functionality, including restaurant searches.
+- **Yelp API**
 
-- **React Native Google Place Autocomplete**:
+- **Redux**
 
-For location search with Google Places data and predictions.
+- **Firebase Authentication**
 
-- **Yelp API**: 
+- **Firebase Cloud Firestore Database**
 
-To fetch data on restaurants and integrate it into the app.
+- **React Navigation**
 
-- **Redux**: 
+- **React Native Vector Icons**
 
-For state management across the app.
+- **Lottie React Native**
 
-- **Firebase Authentication**: 
-
-For user authentication (sign-in, sign-up, and logout functionality).
-
-- **Firebase Firestore Database**: 
-
-For storing order data and user information.
-
-- **React Navigation**: 
-
-For managing navigation within the app, including bottom tabs and stack navigation.
-
-- **React Native Vector Icons**: 
-
-To add icons to the app's UI for a better user experience.
-
-- **Lottie React Native**: 
-
-For implementing animations.
-
-- **Dotenv**: 
-
-For managing environment variables, such as API keys.
+- **Dotenv**
  
-- **React Native Swiper**: 
-
-For implementing a food picture carousel.
+- **React Native Swiper**
 
 - **Jest**
+
 - **React Native Test Library**
+
+## Project Structure
+
+### UI Layer
+
+- **Components**: This folder contains reusable UI components. Each component includes its logic, styles, and test file.
+
+- **Pages**: This folder contains the main screens of the application.
+
+### Service Layer
+
+- **Services**: This folder contains the modules responsible for handling user interactions and data operations.
+
+### Redux folder
+
+- **Redux**: Manages the application's state using Redux. Includes reducers, actions, and the Redux store.
+
+### Constants folder
+
+- **Constants**: Contains fixed values used throughout the application.
+
+### Assets folder
+
+- **Assets**: Contains media files.
 
 ## Functionalities
 

@@ -6,6 +6,7 @@ import { auth, db } from '../firebase.js';
 import { setUser, clearUser, setError, clearError } from '../redux/reducers/profileSlice.js';
 import welcome from '../assets/images/welcome.png';
 import { getUserData, setUserData } from '../redux/reducers/profileSlice.js';
+import Notification from '../components/notification/Notification.js'
 
 export default function ProfilePage ({ navigation }) {
     const dispatch = useDispatch();
@@ -42,14 +43,15 @@ export default function ProfilePage ({ navigation }) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         dispatch(setUser(userCredential.user));
       } catch (error) {
-        dispatch(setError(error.message));
+        console.log('error', error.message)
+        dispatch(setError('Failed to sign in, please check your email or password!'));
       }
     };
   
     const handleSignUp = async () => {
       try {
         if (password !== confirmPassword) {
-          dispatch(setError("Passwords don't match"));
+          dispatch(setError("Passwords don't match!"));
           return;
         }
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -61,7 +63,8 @@ export default function ProfilePage ({ navigation }) {
         dispatch(setUser(userCredential.user));
         await setUserData(userCredential.user.uid, { displayName: displayName, email: email });
       } catch (error) {
-        dispatch(setError(error.message));
+        console.log('error', error.message)
+        dispatch(setError('Failed to sign up!'));
       }
     };
   
@@ -70,7 +73,8 @@ export default function ProfilePage ({ navigation }) {
         await signOut(auth);
         dispatch(clearUser());
       } catch (error) {
-        dispatch(setError(error.message));
+        console.log('error', error.message)
+        dispatch(setError('Failed to sign out!'));
       }
     };
   
@@ -134,6 +138,8 @@ export default function ProfilePage ({ navigation }) {
                       className='flex items-center w-3/4 px-5 py-4 mr-2 text-sm font-medium bg-gray rounded-2xl'
                     />
 
+                    <Notification errorMessage={errorMessage} clearError={() => dispatch(clearError())} />
+
                     <TouchableOpacity 
                         onPress={handleSignIn}
                         className='w-3/4 px-6 py-3 my-8 transition duration-300 bg-primary rounded-full'
@@ -156,7 +162,7 @@ export default function ProfilePage ({ navigation }) {
                       autoCapitalize="none"
                       className='flex items-center w-3/4 px-5 py-4 mr-2 text-sm font-medium bg-gray rounded-2xl'
                     />
-
+            
                     <Text className='mb-2 mt-4 text-sm text-start w-3/4'>*Display Name</Text>
                     <TextInput
                       placeholder="Display Name"
@@ -183,7 +189,9 @@ export default function ProfilePage ({ navigation }) {
                       secureTextEntry
                       className='flex items-center w-3/4 px-5 py-4 mr-2 text-sm font-medium bg-gray rounded-2xl'
                     />
-                    {errorMessage && <Text className='mb-2 mt-4 text-sm text-start w-3/4 color-primary'>{errorMessage}</Text>}
+
+                    <Notification errorMessage={errorMessage} clearError={() => dispatch(clearError())} />
+
                     <TouchableOpacity 
                         onPress={handleSignUp}
                         className='w-3/4 px-6 py-3 my-8 transition duration-300 bg-primary rounded-full'

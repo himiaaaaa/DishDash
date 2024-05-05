@@ -5,6 +5,7 @@ import CartItem from '../CartItem/CartItem.js'
 import left from '../../../assets/icons/left.png'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../../firebase.js'
+import { addOrderToFirebase } from '../../../services/OrdersService.js'
 
 export default function ViewCart({ navigation, restaurantName, user }) {
 
@@ -12,7 +13,6 @@ export default function ViewCart({ navigation, restaurantName, user }) {
   const { items } = useSelector((state) => state.cart.selectedItems);
   const [modalVisible, setModalVisible] = useState(false); 
   const email  = user.user.email
-
 
   useEffect(() => {
     const restaurantItems = items.filter(item => item.restaurantName === restaurantName);
@@ -25,27 +25,6 @@ export default function ViewCart({ navigation, restaurantName, user }) {
     const newTotalPrice = restaurantItems.reduce(getSum, 0).toFixed(2);
     setTotalPrice(newTotalPrice);
   }, [restaurantName, items]);
-
-  const addOrderToFirebase = async () => {
-    try {
-      const restaurantItems = await items.filter(item => item.restaurantName === restaurantName);
-      
-      const orderData = {
-        restaurantName: restaurantName,
-        userEmail: email,
-        items: restaurantItems,
-        totalPrice: totalPrice,
-        pricePlusDelivery: totalPrice >= 200 ? totalPrice: (Number(totalPrice) + 5).toFixed(2),
-        createdAt: serverTimestamp()
-      }
-      await addDoc(collection(db, 'orders'), orderData);
-      console.log('Order added to Firestore successfully');
-      setModalVisible(false);
-      await navigation.navigate('OrderCheckedOut', { restaurantName: restaurantName })
-    } catch (error) {
-      console.error('Error adding order to Firestore: ', error);
-    }
-  }
   
   return (
     <View
@@ -130,7 +109,7 @@ export default function ViewCart({ navigation, restaurantName, user }) {
                     {/* checkout button */}
                     <TouchableOpacity 
                         className='bg-primary rounded-full w-1/2 p-3 mx-auto mt-5 mb-7 flex justify-center items-center' 
-                        onPress={addOrderToFirebase}
+                        onPress={() => addOrderToFirebase(items, restaurantName, totalPrice, email, navigation, setModalVisible)}
                     >       
                         <Text className='text-lg font-bold color-white'>Checkout</Text>
                     </TouchableOpacity>

@@ -7,7 +7,7 @@
     "icon": "./assets/images/deals.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/dot.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

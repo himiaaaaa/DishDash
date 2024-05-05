@@ -1,5 +1,26 @@
-import { collection, getDocs, query, where, orderBy, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy, onSnapshot, doc, deleteDoc,  addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from "../firebase";
+
+export const addOrderToFirebase = async (items, restaurantName, totalPrice, email, navigation, setModalVisible) => {
+  try {
+    const restaurantItems = await items.filter(item => item.restaurantName === restaurantName);
+    
+    const orderData = {
+      restaurantName: restaurantName,
+      userEmail: email,
+      items: restaurantItems,
+      totalPrice: totalPrice,
+      pricePlusDelivery: totalPrice >= 200 ? totalPrice: (Number(totalPrice) + 5).toFixed(2),
+      createdAt: serverTimestamp()
+    }
+    await addDoc(collection(db, 'orders'), orderData);
+    console.log('Order added to Firestore successfully');
+    setModalVisible(false);
+    await navigation.navigate('OrderCheckedOut', { restaurantName: restaurantName })
+  } catch (error) {
+    console.error('Error adding order to Firestore: ', error);
+  }
+};
 
 export const fetchCompletedOrders = async (email, setOrders, navigation) => {
     try {

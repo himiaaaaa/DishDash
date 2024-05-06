@@ -6,41 +6,41 @@ DishDash - a mobile food delivery application developed using React Native.
 
 ## Technologies
 
-- **React Native** & **Expo**
+- **React Native** & **Expo**: For mobile app development
 
-- **NativeWind**
+- **NativeWind**: Styling like using tailwindcss
 
-- **Google Places API**
+- **Google Places API**: Getting place information
 
-- **React Native Google Place Autocomplete**
+- **React Native Google Place Autocomplete** : Autocomplete for places
 
-- **Yelp API**
+- **Yelp API**: Accessing restaurant data
 
-- **Redux**
+- **Redux**: Managing app state
 
-- **Firebase Authentication**
+- **Firebase Authentication**: User authentication
 
-- **Firebase Cloud Firestore Database**
+- **Firebase Cloud Firestore Database** : Storing and syncing data
 
-- **React Navigation**
+- **React Navigation**: Navigating between screens
 
-- **React Native Vector Icons**
+- **React Native Vector Icons**: Icons
 
-- **Lottie React Native**
+- **Lottie React Native**: Animations
 
-- **Dotenv**
+- **Dotenv**: Managing environment variables
  
-- **React Native Swiper**
+- **React Native Swiper**: Swipers
 
-- **Jest**
+- **Jest**: Test
 
-- **React Native Test Library**
+- **React Native Test Library**: Test
 
 ## Project Structure
 
 ### UI Layer
 
-- **Components**: This folder contains reusable UI components. Each component includes its logic, styles, and test file.
+- **Components**: This folder contains reusable UI components. Each file includes its logic, styles, and test file.
 
 - **Pages**: This folder contains the main screens of the application.
 

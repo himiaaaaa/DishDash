@@ -40,23 +40,23 @@ DishDash - a mobile food delivery application developed using React Native.
 
 ### UI Layer
 
-- **Components**: This folder contains reusable UI components. Each file includes its logic, styles, and test file.
+- **Components Folder**: This folder contains reusable UI components. Each file includes its logic, styles, and test file.
 
-- **Pages**: This folder contains the main screens of the application.
+- **Pages Folder**: This folder contains the main screens of the application.
 
 ### Service Layer
 
-- **Services**: This folder contains the modules responsible for handling user interactions and data operations.
+- **Services Folder**: This folder contains the modules responsible for handling user interactions and data operations.
 
-### Redux folder
+#### Redux folder
 
 - **Redux**: Manages the application's state using Redux. Includes reducers, actions, and the Redux store.
 
-### Constants folder
+#### Constants folder
 
 - **Constants**: Contains fixed values used throughout the application.
 
-### Assets folder
+#### Assets folder
 
 - **Assets**: Contains media files.
 

@@ -40,7 +40,7 @@ DishDash - a mobile food delivery application developed using React Native.
 
 ### UI Layer
 
-- **Components Folder**: This folder contains reusable UI components. Each file includes its logic, styles, and test file.
+- **Components Folder**: This folder contains reusable UI components. Each component includes its logic, styles, and test file.
 
 - **Pages Folder**: This folder contains the main screens of the application.
 

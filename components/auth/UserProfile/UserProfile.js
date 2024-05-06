@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { handleSignOut } from '../../../services/authService';
-import welcome from '../../assets/images/welcome.png';
+import welcome from '../../../assets/images/welcome.png';
 
 const UserProfile = ({ user, auth, navigation }) => {
     const dispatch = useDispatch();

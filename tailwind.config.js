@@ -8,8 +8,8 @@ module.exports = {
       gray: '#eee',
       primary: "#fb923c", 
       secondary: "#fee8d6",
-      third: 'FF8A08',
-      fourth: 'FFC100'
+      darkyellow: '#FF6500',
+      lightyellow: '#FFC100'
     },
     extend: {},
   },

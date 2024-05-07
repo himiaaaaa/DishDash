@@ -7,7 +7,9 @@ module.exports = {
       black: "#000",
       gray: '#eee',
       primary: "#fb923c", 
-      secondary: "#fee8d6"
+      secondary: "#fee8d6",
+      third: 'FF8A08',
+      fourth: 'FFC100'
     },
     extend: {},
   },

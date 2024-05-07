@@ -41,10 +41,13 @@ export const profileSlice = createSlice({
     clearError: (state) => {
       state.errorMessage = '';
     },
+    updateDisplayName: (state, action) => {
+      state.user.displayName = action.payload;
+    },
   },
 });
 
-export const { setUser, clearUser, setError, clearError } = profileSlice.actions;
+export const { setUser, clearUser, setError, clearError, updateDisplayName } = profileSlice.actions;
 
 export const setUserData = async (uid, userData) => {
   try {
